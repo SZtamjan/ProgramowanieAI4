@@ -201,6 +201,7 @@ GameObject:
   - component: {fileID: 526330911}
   - component: {fileID: 526330913}
   - component: {fileID: 526330912}
+  - component: {fileID: 526330914}
   m_Layer: 0
   m_Name: NPC
   m_TagString: Untagged
@@ -345,6 +346,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 71802cdd12c94b8bbd8cd9b717cf36bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chaseDistance: 10
+  attackDistance: 5
+--- !u!114 &526330914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 526330906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7871a7b9a52e403bb8469a33536c51c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &673054618

@@ -42,13 +42,19 @@ namespace NPCs
         {
             if (_patrolCoroutine != null)
             {
-                StopCoroutine(PatrolAreaCor());
+                StopCoroutine(_patrolCoroutine);
                 _patrolCoroutine = null;
             }
         }
 
         private IEnumerator PatrolAreaCor()
         {
+            if (_currentPoint == null)
+            {
+                _currentIteration = 0;
+                SetDestanation(checkPoints[_currentIteration]);
+            }
+            
             while (true)
             {
                 CheckDestanation();
@@ -59,13 +65,6 @@ namespace NPCs
 
         private void CheckDestanation()
         {
-            if (_currentPoint == null)
-            {
-                _currentIteration = 0;
-                SetDestanation(checkPoints[_currentIteration]);
-                return;
-            }
-
             if (Vector3.Distance(transform.position, _currentPoint.position) < .1f)
             {
                 if (++_currentIteration >= checkPoints.Count)
