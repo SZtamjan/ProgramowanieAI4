@@ -8,7 +8,9 @@ namespace NPCs
         //Components
         private PatrolArea _patrolArea;
         private NavMeshAgent _navMeshAgent;
-        
+        private ChasePlayer _chasePlayer;
+        private AttackPlayer _attackPlayer;
+
         //Vars
         [SerializeField] private float chaseDistance = 2f;
         [SerializeField] private float attackDistance = 1f;
@@ -17,6 +19,7 @@ namespace NPCs
         //Properties
         public NPCStates CurrentState => _currentState;
         public NavMeshAgent NavMeshAgent => _navMeshAgent;
+        public ChasePlayer ChasePlayer => _chasePlayer;
         public float ChaseDistance => chaseDistance;
 
         public float AttackDistance => attackDistance;
@@ -43,6 +46,16 @@ namespace NPCs
             {
                 _navMeshAgent = navMeshAgent;
             }
+            
+            if (TryGetComponent(out ChasePlayer chasePlayer))
+            {
+                _chasePlayer = chasePlayer;
+            }
+            
+            if (TryGetComponent(out AttackPlayer attackPlayer))
+            {
+                _attackPlayer = attackPlayer;
+            }
         }
 
         public void ChangeState(NPCStates newState)
@@ -53,18 +66,21 @@ namespace NPCs
             {
                 case NPCStates.patrol:
                     _currentState = NPCStates.patrol;
-                    
+                    _attackPlayer.StopAttack();
+                    _chasePlayer.StopChase();
                     _patrolArea.StartPatrol();
                     break;
                 case NPCStates.chase:
                     _currentState = NPCStates.chase;
+                    _attackPlayer.StopAttack();
                     _patrolArea.StopPatrol();
-                    
+                    _chasePlayer.StartChase();
                     break;
                 case NPCStates.attack:
                     _currentState = NPCStates.attack;
                     _patrolArea.StopPatrol();
-                    
+                    _chasePlayer.StopChase();
+                    _attackPlayer.StartAttack();
                     break;
             }
         }

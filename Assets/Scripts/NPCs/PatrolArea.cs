@@ -45,13 +45,14 @@ namespace NPCs
                 StopCoroutine(_patrolCoroutine);
                 _patrolCoroutine = null;
             }
+
+            _currentPoint = null;
         }
 
         private IEnumerator PatrolAreaCor()
         {
             if (_currentPoint == null)
             {
-                _currentIteration = 0;
                 SetDestanation(checkPoints[_currentIteration]);
             }
             

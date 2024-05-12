@@ -14,6 +14,9 @@ namespace NPCs
         //Vars
         private float chaseDistance = 2f;
         private float attackDistance = 1f;
+        
+        //Properties
+        public Transform PlayerTransform => _playerTransform;
         private void Start()
         {
             PrepareData();
